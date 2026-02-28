@@ -1,0 +1,295 @@
+:root {
+    /* Richer dark theme base colors */
+    --bg: #090e17;
+    --card: rgba(15, 23, 42, 0.65);
+    --muted: #94a3b8;
+    --accent: #38bdf8;
+    --accent-hover: #0ea5e9;
+    --success: #10b981;
+    --danger: #ef4444;
+    --surface: rgba(30, 41, 59, 0.5);
+    --text: #f8fafc;
+    /* Glassmorphism helpers */
+    --glass-border: 1px solid rgba(255, 255, 255, 0.08);
+    --glass-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+}
+
+[data-theme="light"] {
+    --bg: #f8fafc;
+    --card: rgba(255, 255, 255, 0.8);
+    --muted: #64748b;
+    --accent: #0284c7;
+    --accent-hover: #0369a1;
+    --surface: rgba(241, 245, 249, 0.6);
+    --text: #0f172a;
+    --glass-border: 1px solid rgba(0, 0, 0, 0.05);
+    --glass-shadow: 0 4px 30px rgba(0, 0, 0, 0.05);
+}
+
+/* Accessibility utilities */
+.ff-skip-link {
+    position: absolute;
+    top: -40px;
+    left: 0;
+    background: var(--accent);
+    color: var(--bg);
+    padding: 8px 16px;
+    text-decoration: none;
+    z-index: 100;
+    font-weight: 600;
+}
+
+.ff-skip-link:focus {
+    top: 0;
+}
+
+.ff-sr-only {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    padding: 0;
+    margin: -1px;
+    overflow: hidden;
+    clip: rect(0, 0, 0, 0);
+    white-space: nowrap;
+    border-width: 0;
+}
+
+/* Focus visibility */
+:focus-visible {
+    outline: 2px solid var(--accent);
+    outline-offset: 2px;
+}
+
+/* Reduce motion for animations */
+@media (prefers-reduced-motion: reduce) {
+    * {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+    }
+}
+
+* {
+    box-sizing: border-box
+}
+
+body {
+    font-family: Inter, system-ui, -apple-system, Segoe UI, Roboto, "Helvetica Neue", Arial, sans-serif;
+    margin: 0;
+    background: var(--bg);
+    /* Subtle background gradient for depth */
+    background-image: radial-gradient(circle at top right, rgba(56, 189, 248, 0.05), transparent 40%),
+                      radial-gradient(circle at bottom left, rgba(139, 92, 246, 0.05), transparent 40%);
+    background-attachment: fixed;
+    color: var(--text);
+    min-height: 100vh;
+    transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+.ff-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 12px 20px;
+    background: linear-gradient(90deg, #071125, #071726);
+    border-bottom: 1px solid rgba(255, 255, 255, .03)
+}
+
+.ff-header__title {
+    margin: 0;
+    font-size: 18px
+}
+
+.ff-header__search input {
+    padding: 8px 10px;
+    border-radius: 6px;
+    border: 1px solid rgba(255, 255, 255, .06);
+    background: transparent;
+    color: var(--text);
+    min-width: 220px
+}
+
+.ff-main {
+    display: flex;
+    gap: 16px;
+    padding: 18px
+}
+
+.ff-sidebar {
+    width: 280px
+}
+
+.ff-board-area {
+    flex: 1;
+    min-width: 0
+}
+
+.ff-board {
+    display: flex;
+    gap: 12px;
+    align-items: flex-start;
+    overflow: auto;
+    padding-bottom: 24px
+}
+
+.ff-column {
+    background: var(--card);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    min-width: 280px;
+    border-radius: 12px;
+    padding: 12px;
+    border: var(--glass-border);
+    display: flex;
+    flex-direction: column;
+    max-height: 78vh;
+    box-shadow: var(--glass-shadow);
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.ff-column:hover {
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.15);
+}
+
+.ff-column__title {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin: 0 0 8px 0;
+    font-weight: 600
+}
+
+.ff-column__list {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    overflow: auto
+}
+
+.ff-task {
+    background: var(--surface);
+    backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px);
+    padding: 12px;
+    border-radius: 8px;
+    border: var(--glass-border);
+    cursor: grab;
+    transition: transform 0.15s ease, box-shadow 0.15s ease, border-color 0.15s ease;
+}
+
+.ff-task:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 16px rgba(0, 0, 0, 0.1);
+    border-color: var(--accent);
+}
+
+.ff-task:focus {
+    outline: 2px solid var(--accent)
+}
+
+.ff-controls {
+    margin-top: 12px;
+    display: flex;
+    gap: 8px
+}
+
+button {
+    background: transparent;
+    border: 1px solid rgba(255, 255, 255, .06);
+    color: var(--text);
+    padding: 8px 12px;
+    border-radius: 6px;
+    cursor: pointer;
+    font-family: inherit;
+    font-weight: 500;
+    transition: all 0.2s ease;
+}
+
+[data-theme="light"] button {
+    border: 1px solid rgba(0, 0, 0, .06);
+}
+
+button:hover {
+    background: rgba(255, 255, 255, 0.05);
+    border-color: rgba(255, 255, 255, 0.1);
+}
+
+[data-theme="light"] button:hover {
+    background: rgba(0, 0, 0, 0.03);
+    border-color: rgba(0, 0, 0, 0.1);
+}
+
+.ff-icon-btn {
+    padding: 6px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border: none;
+    background: rgba(255, 255, 255, 0.03);
+    border-radius: 8px;
+}
+
+[data-theme="light"] .ff-icon-btn {
+    background: rgba(0, 0, 0, 0.03);
+}
+
+.ff-icon-btn:hover {
+    background: rgba(255, 255, 255, 0.1);
+    color: var(--accent);
+    transform: scale(1.05);
+}
+
+[data-theme="light"] .ff-icon-btn:hover {
+    background: rgba(0, 0, 0, 0.08);
+}
+
+.ff-icon {
+    display: block;
+}
+
+.ff-heading {
+    font-size: 13px;
+    margin: 0 0 8px 0;
+    color: var(--muted)
+}
+
+.ff-list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 6px
+}
+
+.ff-filter {
+    display: flex;
+    gap: 6px;
+    align-items: center;
+    margin-bottom: 6px
+}
+
+.ff-analytics-card {
+    background: var(--surface);
+    backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px);
+    padding: 12px;
+    border-radius: 8px;
+    border: var(--glass-border);
+    margin-bottom: 8px;
+    transition: transform 0.2s ease;
+}
+.ff-analytics-card:hover {
+    transform: translateX(4px);
+}
+
+@media (max-width:900px) {
+    .ff-main {
+        flex-direction: column
+    }
+
+    .ff-sidebar {
+        width: 100%
+    }
+}

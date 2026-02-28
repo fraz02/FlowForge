@@ -1,0 +1,10 @@
+{
+    "name": "flowforge",
+    "version": "1.0.0",
+    "description": "Static site for FlowForge",
+    "scripts": {
+        "build": "echo \"No build step defined\""
+    },
+    "author": "",
+    "license": "MIT"
+}

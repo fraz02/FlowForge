@@ -1,0 +1,106 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <title>FlowForge</title>
+    <link rel="stylesheet" href="src/styles.css">
+    <link rel="stylesheet" href="src/ui.css">
+</head>
+
+<body>
+    <a href="#board" class="ff-skip-link">Skip to main content</a>
+    <div aria-live="polite" aria-atomic="true" class="ff-sr-only" id="sr-announce"></div>
+    <header class="ff-nav" role="banner">
+        <div class="ff-nav__inner">
+            <div class="ff-logo">FlowForge</div>
+            <div class="ff-nav__controls">
+                <input id="search" class="ff-search" aria-label="Search tasks"
+                    placeholder="Search tasks, tags, members...">
+                <button id="theme-toggle" class="ff-icon-btn" aria-label="Toggle theme">
+                    <svg class="ff-icon ff-icon-sun" xmlns="http://www.w3.org/2000/svg" width="20" height="20"
+                        viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                        stroke-linejoin="round">
+                        <circle cx="12" cy="12" r="4" />
+                        <path d="M12 2v2" />
+                        <path d="M12 20v2" />
+                        <path d="m4.93 4.93 1.41 1.41" />
+                        <path d="m17.66 17.66 1.41 1.41" />
+                        <path d="M2 12h2" />
+                        <path d="M20 12h2" />
+                        <path d="m6.34 17.66-1.41 1.41" />
+                        <path d="m19.07 4.93-1.41 1.41" />
+                    </svg>
+                    <svg class="ff-icon ff-icon-moon" xmlns="http://www.w3.org/2000/svg" width="20" height="20"
+                        viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                        stroke-linejoin="round">
+                        <path d="M12 3a6 6 0 0 0 9 9 9 9 0 1 1-9-9Z" />
+                    </svg>
+                </button>
+                <button id="profile" class="ff-icon-btn" aria-label="Profile">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none"
+                        stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <path d="M19 21v-2a4 4 0 0 0-4-4H9a4 4 0 0 0-4 4v2" />
+                        <circle cx="12" cy="7" r="4" />
+                    </svg>
+                </button>
+            </div>
+        </div>
+    </header>
+
+    <main class="ff-main">
+        <aside class="ff-sidebar" aria-label="Workspace sidebar">
+            <div class="ff-sidebar__scroll">
+                <section class="ff-workspace">
+                    <h2 class="ff-heading">Workspaces</h2>
+                    <ul id="workspace-list" class="ff-list" role="list" aria-label="Workspaces"></ul>
+                    <button id="add-workspace" class="ff-small-btn" aria-label="Create a new workspace">+ Add
+                        Workspace</button>
+                    <button id="export-workspace" class="ff-small-btn"
+                        aria-label="Export current workspace as JSON">Export Workspace</button>
+                    <button id="import-workspace" class="ff-small-btn" aria-label="Import workspace from JSON">Import
+                        Workspace</button>
+                </section>
+                <section class="ff-projects">
+                    <h2 class="ff-heading">Projects</h2>
+                    <ul id="project-list" class="ff-list" role="list" aria-label="Projects"></ul>
+                    <button id="add-project" class="ff-small-btn" aria-label="Create a new project">+ Add
+                        Project</button>
+                </section>
+                <section class="ff-filters">
+                    <h2 class="ff-heading">Filters</h2>
+                    <div id="filters"></div>
+                </section>
+                <section class="ff-analytics" aria-live="polite">
+                    <h2 class="ff-heading">Analytics</h2>
+                    <div id="analytics"></div>
+                </section>
+            </div>
+        </aside>
+
+        <section class="ff-board-area">
+            <div class="ff-board-header">
+                <h1 id="board-title" class="ff-board__title">Loading...</h1>
+            </div>
+            <div id="board" class="ff-board" role="list" aria-label="Kanban board"></div>
+            <div class="ff-controls">
+                <button id="add-board" aria-label="Create a new board">+ Add Board</button>
+                <button id="delete-board" class="ff-small-btn" aria-label="Delete current board">Delete Board</button>
+                <button id="add-column" aria-label="Add column to current board">+ Add Column</button>
+                <button id="add-task" aria-label="Create a new task">+ New Task</button>
+            </div>
+        </section>
+
+        <aside id="drawer" class="ff-drawer" aria-hidden="true" role="dialog"></aside>
+    </main>
+
+    <template id="task-template">
+        <article class="ff-task" draggable="true" role="listitem"></article>
+    </template>
+
+    <script type="module" src="src/app.js"></script>
+
+</body>
+
+</html>

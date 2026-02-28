@@ -1,0 +1,224 @@
+/* UI overrides and modern layout styles for FlowForge */
+:root {
+    --sidebar-width: 280px;
+    --nav-height: 56px;
+    --gap: 12px;
+    --radius: 8px;
+    --transition: 200ms ease;
+    --elevation: 0 6px 20px rgba(2, 6, 23, 0.6)
+}
+
+/* Top navigation */
+.ff-nav {
+    position: fixed;
+    left: 0;
+    right: 0;
+    top: 0;
+    height: var(--nav-height);
+    background: rgba(9, 14, 23, 0.7);
+    backdrop-filter: blur(16px);
+    -webkit-backdrop-filter: blur(16px);
+    border-bottom: var(--glass-border);
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+    z-index: 60;
+    transition: background-color 0.3s ease;
+}
+
+[data-theme="light"] .ff-nav {
+    background: rgba(255, 255, 255, 0.7);
+}
+
+.ff-nav__inner {
+    max-width: 1200px;
+    margin: 0 auto;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 16px
+}
+
+.ff-logo {
+    font-weight: 600
+}
+
+.ff-nav__controls {
+    display: flex;
+    align-items: center;
+    gap: 8px
+}
+
+.ff-search {
+    padding: 6px 12px;
+    border-radius: 8px;
+    border: var(--glass-border);
+    background: var(--surface);
+    color: inherit;
+    font-family: inherit;
+    transition: all 0.2s ease;
+    width: 240px;
+}
+
+.ff-search:focus {
+    width: 280px;
+    outline: none;
+    border-color: var(--accent);
+    box-shadow: 0 0 0 3px rgba(56, 189, 248, 0.15);
+}
+
+/* Layout */
+.ff-main {
+    display: flex;
+    gap: var(--gap);
+    padding: calc(var(--nav-height) + 18px) 18px 24px 18px
+}
+
+.ff-sidebar {
+    width: var(--sidebar-width);
+    flex: 0 0 var(--sidebar-width)
+}
+
+.ff-sidebar__scroll {
+    position: sticky;
+    top: calc(var(--nav-height) + 12px);
+    max-height: calc(100vh - var(--nav-height) - 24px);
+    overflow: auto;
+    padding-right: 8px
+}
+
+.ff-board-area {
+    flex: 1;
+    min-width: 0
+}
+
+.ff-board-header {
+    padding: 12px 0;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+    margin-bottom: 12px;
+}
+
+.ff-board__title {
+    margin: 0;
+    font-size: 1.5em;
+    font-weight: 600;
+}
+
+.ff-board {
+    display: flex;
+    gap: 12px;
+    align-items: flex-start;
+    overflow: auto;
+    padding-bottom: 24px
+}
+
+/* Drawer (right side task details) */
+.ff-drawer {
+    position: fixed;
+    right: 0;
+    top: var(--nav-height);
+    height: calc(100vh - var(--nav-height));
+    width: 400px;
+    background: var(--bg);
+    border-left: var(--glass-border);
+    box-shadow: -8px 0 32px rgba(0, 0, 0, 0.2);
+    transform: translateX(110%);
+    transition: transform var(--transition) cubic-bezier(0.4, 0, 0.2, 1);
+    z-index: 70;
+    padding: 24px;
+    overflow: auto;
+}
+
+.ff-drawer.open {
+    transform: translateX(0)
+}
+
+.ff-drawer .ff-drawer__header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center
+}
+
+.ff-drawer input,
+.ff-drawer textarea,
+.ff-drawer select {
+    width: 100%;
+    padding: 8px;
+    border-radius: 6px;
+    border: 1px solid rgba(255, 255, 255, 0.05);
+    background: transparent;
+    color: inherit;
+    margin-top: 8px
+}
+
+.ff-drawer .ff-activity {
+    margin-top: 12px;
+    border-top: 1px dashed rgba(255, 255, 255, 0.03);
+    padding-top: 8px
+}
+
+@media (max-width:900px) {
+    .ff-main {
+        flex-direction: column
+    }
+
+    .ff-sidebar {
+        width: 100%
+    }
+}
+
+/* sidebar utility buttons */
+.ff-small-btn {
+    display: block;
+    margin: 4px 0;
+    font-size: 0.9em;
+    background: transparent;
+    border: none;
+    color: var(--accent);
+    cursor: pointer;
+    text-align: left;
+    padding: 6px 8px;
+    border-radius: 6px;
+    width: 100%;
+    transition: background 0.2s;
+}
+
+.ff-small-btn:hover {
+    background: rgba(56, 189, 248, 0.1);
+    border: none;
+}
+
+.ff-inline-del {
+    margin-left: 8px;
+    background: none;
+    border: none;
+    color: #ef4444;
+    cursor: pointer;
+    font-size: 0.8em;
+}
+
+.ff-list li {
+    padding: 6px 8px;
+    border-radius: 6px;
+    transition: background 0.2s ease, color 0.2s ease;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.ff-list li:hover {
+    background: rgba(255, 255, 255, 0.05);
+}
+
+[data-theme="light"] .ff-list li:hover {
+    background: rgba(0, 0, 0, 0.05);
+}
+
+.ff-list li.selected {
+    font-weight: 600;
+    background: rgba(56, 189, 248, 0.15);
+    color: var(--accent);
+}
+
+[data-theme="light"] .ff-list li.selected {
+    background: rgba(2, 132, 199, 0.1);
+}
