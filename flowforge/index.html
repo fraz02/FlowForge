@@ -45,6 +45,12 @@
                         <circle cx="12" cy="7" r="4" />
                     </svg>
                 </button>
+                <!-- Google One‑tap sign‑in button container -->
+                <div id="google-signin" style="display:inline-block;margin-left:8px;"></div>
+                <!-- user info display -->
+                <span id="user-name" class="ff-user-name" style="margin-left:8px;color:var(--accent);"></span>
+                <img id="user-pic" class="ff-user-pic" src="" alt=""
+                    style="width:24px;height:24px;border-radius:50%;margin-left:4px;" />
             </div>
         </div>
     </header>
@@ -90,22 +96,6 @@
                 <button id="add-column" aria-label="Add column to current board">+ Add Column</button>
                 <button id="add-task" aria-label="Create a new task">+ New Task</button>
             </div>
-            <div id="g_id_onload"
-     data-client_id="120751451097-lta0ud3jkjs59rlc72anktoqvh2fbaqt.apps.googleusercontent.com"
-     data-context="signin"
-     data-ux_mode="popup"
-     data-callback="handleCredentialResponse"
-     data-auto_prompt="false">
-</div>
-
-<div class="g_id_signin"
-     data-type="standard"
-     data-shape="rectangular"
-     data-theme="outline"
-     data-text="signin_with"
-     data-size="large"
-     data-logo_alignment="left">
-</div>
         </section>
 
         <aside id="drawer" class="ff-drawer" aria-hidden="true" role="dialog"></aside>
@@ -125,8 +115,24 @@
         <article class="ff-task" draggable="true" role="listitem"></article>
     </template>
 
-    <script type="module" src="src/app.js"></script>
     <script src="https://accounts.google.com/gsi/client" async defer></script>
+    <script type="module">
+        import { handleCredentialResponse } from './src/auth-ui.js';
+
+        window.addEventListener('load', () => {
+            if (window.google && google.accounts && google.accounts.id) {
+                google.accounts.id.initialize({
+                    client_id: '120751451097-lta0ud3jkjs59rlc72anktoqvh2fbaqt.apps.googleusercontent.com',
+                    callback: handleCredentialResponse
+                });
+                google.accounts.id.renderButton(
+                    document.getElementById('google-signin'),
+                    { theme: 'outline', size: 'large' }
+                );
+            }
+        });
+    </script>
+    <script type="module" src="src/app.js"></script>
 
 </body>
 
